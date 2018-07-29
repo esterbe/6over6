@@ -15,7 +15,7 @@ export default class FileSelector extends Component {
             <div className="file-selection">
                 <div className="content">
                     <img alt='' className="upload"/>
-                    <span className="filename">{this.props.fileName}</span>
+                    <span>{this.props.fileName}</span>
                     <input type="file" className="input" onChange={this.props.onSelectPhoto}/>
                 </div>
             </div>

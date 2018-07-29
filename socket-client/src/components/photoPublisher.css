@@ -75,3 +75,7 @@
     cursor: pointer;
     transition: all .2s ease-in-out;
 }
+
+.upload-btn.disabled {
+    background: #A4A4A4;
+}
