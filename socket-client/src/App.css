@@ -1,28 +1,91 @@
-.App {
-  text-align: center;
+html {
+  box-sizing: border-box;
+  font-family: sans-serif;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+html, body {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: small;
+  min-width: 1024px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #e4e4e4;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+button, a {
+  outline: none;
 }
 
-.App-title {
-  font-size: 1.5em;
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
-.App-intro {
-  font-size: large;
+a {
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+a {
+  background-color: transparent;
+}
+
+img {
+  border-style: none;
+}
+
+img, a {
+  border:none;
+  outline: none;
+}
+
+
+input, optgroup, select, textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  outline: none;
+}
+
+
+select {
+  text-transform: none;
+}
+
+button, html input[type="button"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */
+}
+
+button[disabled], html input[disabled] {
+  cursor: default;
+}
+
+textarea {
+  overflow: auto;
+  color: gray;
+  padding: 5px;
+}
+
+textarea:focus {
+  border: 1px solid lightskyblue;
+}
+
+label{ display:block; }
+
+
+.app {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -350px;
+  margin-left: -200px;
 }
