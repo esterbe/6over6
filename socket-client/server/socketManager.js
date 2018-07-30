@@ -8,7 +8,6 @@ module.exports = function(socket) {
 
     //save connected clients
     socket.on(Events.CLIENT_CONNECTED, (clientType) => {
-        debugger
         connectedClients[clientType.name] = socket.id;
         console.log("Socket Id: " + socket.id);
         console.log("Client type: " + clientType.name);
