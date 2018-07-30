@@ -3,12 +3,11 @@ import autoBind             from 'auto-bind';
 import io                   from 'socket.io-client';
 import Events               from '../events';
 import {Clients,Status}     from "../common";
+import _                    from 'lodash';
 
 import '../styles/photoReceiver.css'
-import '../styles/app.css'
 
-
-const SOCKET_URL = "http://192.168.0.15:3231";
+const SOCKET_URL = "http://localhost:3231";
 export default class PhotoReceiver extends Component {
 
     constructor(){
@@ -48,13 +47,16 @@ export default class PhotoReceiver extends Component {
         socket.on(Events.TRANSFER_COMPLETED, () => {
             //TODO: join all slices into one image
 
-            //var res = this._spliceBuffers(self.state.slices);
-            //var blob = new Blob(res, {type: 'image/jpeg'} );
-            //var newBlob = new Blob(self.state.slices, {type: 'image/jpeg'});
-            //var objectURL = URL.createObjectURL(newBlob);
-            var objectURL = '';
+            let sortedSlices = _.sortBy(self.state.slices, 'index').map(item => {
+                return new Uint8Array(item.chunkData);
+            });
+
+            var newBlob = new Blob(sortedSlices, {type: 'image/jpeg'});
+            var objectURL = URL.createObjectURL(newBlob);
+            //var objectURL = '';
             self.setState({transferStatus: Status.DONE, totalChunksArriving: 0, chunksReceived: 0, slices: [], objectURL:objectURL});
 
+            self.state.socket.emit(Events.PHOTO_RECEIVED);
         });
     }
 
@@ -71,18 +73,19 @@ export default class PhotoReceiver extends Component {
         switch (this.state.transferStatus) {
             case Status.SYNCING:
                 status = (
-                [<img alt='' className="syncing syncing-active"/>,
-                    <span>a photo is on it's way...</span>]
+                    <div className="status">
+                        <div className="syncing syncing-active"/>
+                        <span>a photo is on it's way...</span>
+                    </div>
                 )
                 break;
             case Status.DONE:
-                status = (
-                    <img alt='' className="done done-active"/>
-                )
                 break;
             default:
                 status = (
-                    <span>Waiting for a photo</span>
+                    <div className="status">
+                        <span>Waiting for a photo</span>
+                    </div>
                 )
                 break;
         }
@@ -93,12 +96,14 @@ export default class PhotoReceiver extends Component {
     render() {
         return (
             <div className="container">
-                <div className="status">
-                    { this._renderStatus() }
-                </div>
-                <div>
+                { this._renderStatus() }
+                <div className="displayPhoto">
                     {
-                        (this.state.objectURL) ?  <img alt="" src={this.state.objectURL}></img> : null
+                        (this.state.objectURL && this.state.transferStatus === Status.DONE) ?
+                            <a target="_blank" href={this.state.objectURL}>
+                                <img className='displayPhoto' src={this.state.objectURL} alt=""/>
+                            </a>
+                            : null
                     }
                 </div>
             </div>

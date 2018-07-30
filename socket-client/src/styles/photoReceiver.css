@@ -1,4 +1,30 @@
 .status {
     margin: 15px auto 0 auto;
     width: 130px;
+    display: flex;
+}
+
+.displayPhoto{
+}
+
+.syncing {
+    background: url("../static/images/syncing.svg") no-repeat;
+    margin-left: 5px;
+    margin-top: 5px;
+    width: 62px;
+    height: 36px;
+    animation: syncing 3.2s ease-in-out;
+}
+
+.displayPhoto {
+    margin: 0 auto;
+    padding: 5px;
+    width: 150px;
+    min-width: 330px;
+    min-height: 260px;
+}
+
+/* Add a hover effect (blue shadow) */
+img:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }

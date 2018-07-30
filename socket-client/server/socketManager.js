@@ -8,6 +8,7 @@ module.exports = function(socket) {
 
     //save connected clients
     socket.on(Events.CLIENT_CONNECTED, (clientType) => {
+        debugger
         connectedClients[clientType.name] = socket.id;
         console.log("Socket Id: " + socket.id);
         console.log("Client type: " + clientType.name);
@@ -32,5 +33,12 @@ module.exports = function(socket) {
         console.log("TRANSFER_COMPLETED");
         let receiverSocketId = connectedClients[Clients.RECEIVER];
         io.to(receiverSocketId).emit(Events.TRANSFER_COMPLETED);
+    });
+
+    //notify publisher when photo received
+    socket.on(Events.PHOTO_RECEIVED, () => {
+        console.log("PHOTO_RECEIVED");
+        let publisherSocketId = connectedClients[Clients.PUBLISHER];
+        io.to(publisherSocketId).emit(Events.PHOTO_RECEIVED);
     });
 }
