@@ -3,7 +3,7 @@ import {Route, Switch} from 'react-router-dom';
 
 import PhotoPublisher from './components/photoPublisher';
 import PhotoReceiver from './components/photoReceiver';
-import './App.css';
+import './styles/base.css';
 
 class App extends Component {
   render() {

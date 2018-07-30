@@ -1,3 +1,4 @@
+
 html {
   box-sizing: border-box;
   font-family: sans-serif;
@@ -87,11 +88,12 @@ textarea:focus {
 
 label{ display:block; }
 
-
 .app {
   position: absolute;
-  top: 50%;
   left: 50%;
-  margin-top: -350px;
-  margin-left: -200px;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 50%;
 }
